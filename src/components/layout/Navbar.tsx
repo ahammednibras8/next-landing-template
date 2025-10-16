@@ -26,7 +26,7 @@ export default function Navbar() {
             <figure className="flex items-center justify-between py-2 lg:px-2 px-4">
               <div>
                 <Image
-                  src="/logo.svg"
+                  src="branding/logo.svg"
                   alt="Logo"
                   width={120}
                   height={40}
