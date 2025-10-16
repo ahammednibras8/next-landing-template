@@ -12,7 +12,9 @@ const Pointer = (props: { name: string; color?: "red" | "blue" }) => {
           "ml-5 inline-flex rounded-full font-bold text-sm bg-blue-500 px-2 rounded-tl-none",
           color === "red" && "bg-red-500"
         )}
-      ></p>
+      >
+        {name}
+      </p>
     </div>
   );
 };
