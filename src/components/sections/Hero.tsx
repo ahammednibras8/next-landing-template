@@ -141,7 +141,7 @@ export default function Hero() {
               size="sm"
               type="submit"
               variant="primary"
-              className="rounded-r-full px-6"
+              className="rounded-r-full px-6 hover:text-lime-400 hover:bg-black transition-colors duration-300"
             >
               Sign Up
             </Button>
