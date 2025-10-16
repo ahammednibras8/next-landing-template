@@ -51,7 +51,16 @@ export default function Hero() {
         { duration: 0.8, ease: "easeInOut" },
       ],
     ]);
-  }, []);
+  }, [
+    leftDesignAnimate,
+    leftDesignScope,
+    leftPointerAnimate,
+    leftPointerScope,
+    rightDesignAnimate,
+    rightDesignScope,
+    rightPointerAnimate,
+    rightPointerScope,
+  ]);
 
   return (
     <section
@@ -113,8 +122,8 @@ export default function Hero() {
             Impactful design, created effortlessly
           </h1>
           <p className="text-xl text-white/50 mt-8 max-w-2xl">
-            Design tool shouldn't slow you down. Create, Prototype, and test
-            with ease
+            Design tool shouldn&apos;t slow you down. Create, Prototype, and
+            test with ease
           </p>
 
           <motion.form
