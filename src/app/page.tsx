@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import Integrations from "@/components/sections/Integrations";
 import LogoTicker from "@/components/sections/LogoTicker";
 import Pricing from "@/components/sections/Pricing";
+import Testimonials from "@/components/sections/Testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Features />
       <Integrations />
       <Pricing />
+      <Testimonials />
     </>
   );
 }
