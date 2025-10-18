@@ -16,8 +16,8 @@ export default function Home() {
       <LogoTicker />
       <Features />
       <Integrations />
-      <Pricing />
       <Testimonials />
+      <Pricing />
       <Faqs />
       <Footer />
     </>
