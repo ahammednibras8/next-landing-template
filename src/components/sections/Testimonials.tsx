@@ -44,7 +44,7 @@ const testimonials = [
     role: "UI/UX Designer",
     avatar: "/components/feature/person.jpg",
     content:
-      "Finally, a design tool that doesn't get in the way. The flow mode is pure magic, and the auto layout saves so much manual work.",
+      "Finally, a design tool that doesn’t get in the way. The flow mode is pure magic, and the auto layout saves so much manual work.",
     rating: 5,
   },
   {
@@ -52,7 +52,7 @@ const testimonials = [
     role: "Design Manager at Innovation Labs",
     avatar: "/components/feature/me.jpeg",
     content:
-      "Our design team won't work with anything else. The collaboration features make remote work feel seamless, and the performance is outstanding.",
+      "Our design team won’t work with anything else. The collaboration features make remote work feel seamless, and the performance is outstanding.",
     rating: 5,
   },
 ];
@@ -73,14 +73,17 @@ export default function Testimonials() {
         <div className="flex justify-center">
           <Tag>Testimonials</Tag>
         </div>
+
         <h2 className="text-6xl font-medium text-center mt-6 max-w-3xl">
           Loved by designers{" "}
           <span className="text-lime-400 font-bold">worldwide</span>
         </h2>
+
         <p className="text-xl text-white/50 mt-6 text-center max-w-2xl">
           Join thousands of designers who have transformed their workflow
         </p>
 
+        {/* Testimonials Grid */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -100,7 +103,7 @@ export default function Testimonials() {
                 </div>
 
                 <p className="text-white/70 text-sm leading-relaxed flex-1 mb-6">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
 
                 <div className="flex items-center gap-3 pt-4 border-t border-white/10">
@@ -125,6 +128,7 @@ export default function Testimonials() {
           ))}
         </div>
 
+        {/* Metrics Section */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -136,6 +140,7 @@ export default function Testimonials() {
             <div className="text-5xl font-bold text-lime-400">50K+</div>
             <p className="text-white/50 mt-2">Active Users</p>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -146,6 +151,7 @@ export default function Testimonials() {
             <div className="text-5xl font-bold text-lime-400">4.9/5</div>
             <p className="text-white/50 mt-2">Average Rating</p>
           </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

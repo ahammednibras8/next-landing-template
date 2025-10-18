@@ -3,7 +3,6 @@
 import { Check, Sparkles } from "lucide-react";
 import Tag from "../elements/Tag";
 import { easeOut, motion } from "motion/react";
-import { features } from "process";
 import Button from "../ui/Button";
 
 const pricingPlans = [
