@@ -1,94 +1,167 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { Plus } from "lucide-react";
-import { useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { easeOut, motion } from "motion/react";
 import Tag from "../elements/Tag";
+import { Star } from "lucide-react";
+import Avatar from "../elements/Avatar";
+import Image from "next/image";
 
-const faqs = [
+const testimonials = [
   {
-    question: "How is Layers different from other design tools?",
-    answer:
-      "Unlike traditional design tools, Layers prioritizes speed and simplicity without sacrificing power. Our intelligent interface adapts to your workflow, reducing clicks and keeping you in your creative flow.",
+    name: "Sarah Chen",
+    role: "Design Lead at TechFlow",
+    avatar: "/components/feature/people.jpg",
+    content:
+      "This tool has completely transformed our design workflow. The real-time collaboration features are game-changing, and our team's productivity has increased by 300%.",
+    rating: 5,
   },
   {
-    question: "Is there a learning curve?",
-    answer:
-      "Layers is designed to feel intuitive from day one. Most designers are productive within hours, not weeks. We also provide interactive tutorials and comprehensive documentation to help you get started.",
+    name: "Marcus Rodriguez",
+    role: "Freelance Designer",
+    avatar: "/components/feature/person.jpg",
+    content:
+      "I've tried every design tool out there, and this is by far the most intuitive. The keyboard shortcuts save me hours every week. Absolutely love it!",
+    rating: 5,
   },
   {
-    question: "How do you handle version control?",
-    answer:
-      "Every change in Layers is automatically saved and versioned. You can review history, restore previous versions, and create named versions for important milestones.",
+    name: "Ahammed Nibras",
+    role: "Developer",
+    avatar: "/components/feature/me.jpeg",
+    content:
+      "The prototyping capabilities are incredible. I can create interactive demos in minutes instead of hours. Our clients are always impressed.",
+    rating: 5,
   },
   {
-    question: "Can I work offline?",
-    answer:
-      "Yes! Layers includes a robust offline mode. Changes sync automatically when you're back online, so you can keep working anywhere.",
+    name: "David Park",
+    role: "Creative Director",
+    avatar: "/components/feature/people.jpg",
+    content:
+      "Best investment we've made this year. The asset library and smart sync features have streamlined our entire creative process.",
+    rating: 5,
   },
   {
-    question: "How does Layers handle collaboration?",
-    answer:
-      "Layers is built for collaboration. You can invite team members to your projects, share feedback, and work together in real-time.",
+    name: "Lisa Anderson",
+    role: "UI/UX Designer",
+    avatar: "/components/feature/person.jpg",
+    content:
+      "Finally, a design tool that doesn’t get in the way. The flow mode is pure magic, and the auto layout saves so much manual work.",
+    rating: 5,
+  },
+  {
+    name: "James Wilson",
+    role: "Design Manager at Innovation Labs",
+    avatar: "/components/feature/me.jpeg",
+    content:
+      "Our design team won’t work with anything else. The collaboration features make remote work feel seamless, and the performance is outstanding.",
+    rating: 5,
   },
 ];
 
-export default function Faqs() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut },
+  },
+};
 
+export default function Testimonials() {
   return (
-    <section className="py-24 ">
-      <div className="container">
+    <section className="py-24 flex justify-center overflow-hidden">
+      <div className="w-full max-w-6xl flex flex-col items-center px-4">
         <div className="flex justify-center">
-          <Tag>Faqs</Tag>
+          <Tag>Testimonials</Tag>
         </div>
-        <h2 className="text-6xl font-medium mt-6 text-center max-w-xl mx-auto">
-          Questions? We&apos;ve got{" "}
-          <span className="text-lime-400">answers</span>
+
+        <h2 className="text-6xl font-medium text-center mt-6 max-w-3xl">
+          Loved by designers{" "}
+          <span className="text-lime-400 font-bold">worldwide</span>
         </h2>
 
-        <div className="mt-12 flex flex-col gap-6 max-w-xl mx-auto">
-          {faqs.map((faq, faqIndex) => (
-            <div
-              key={faq.question}
-              onClick={() => setSelectedIndex(faqIndex)}
-              className="bg-neutral-900 rounded-2xl border border-white/10 p-6 "
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="font-medium m-0">{faq.question}</h3>
-                <Plus
-                  size={30}
-                  className={twMerge(
-                    "feather feather-plus text-lime-400 flex-shrink-0 transition duration-300",
-                    selectedIndex === faqIndex && "rotate-45"
-                  )}
-                />
-              </div>
+        <p className="text-xl text-white/50 mt-6 text-center max-w-2xl">
+          Join thousands of designers who have transformed their workflow
+        </p>
 
-              <AnimatePresence>
-                {selectedIndex === faqIndex && (
-                  <motion.div
-                    initial={{
-                      height: 0,
-                      marginTop: 0,
-                    }}
-                    animate={{
-                      height: "auto",
-                      marginTop: 24,
-                    }}
-                    exit={{
-                      height: 0,
-                      marginTop: 0,
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <p className="text-white/50">{faq.answer}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+        {/* Testimonials Grid */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          {testimonials.map((testimonial, index) => (
+            <motion.div
+              key={index}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.1 }}
+              className="group"
+            >
+              <div className="bg-neutral-900 border border-white/10 rounded-3xl p-6 h-full flex flex-col hover:border-lime-400/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(132,204,22,0.1)]">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={16} className="fill-lime-400" />
+                  ))}
+                </div>
+
+                <p className="text-white/70 text-sm leading-relaxed flex-1 mb-6">
+                  &quot;{testimonial.content}&quot;
+                </p>
+
+                <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+                  <Avatar className="ring-2 ring-transparent group-hover:ring-lime-400/50 transition-all duration-500">
+                    <Image
+                      width={200}
+                      height={200}
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="rounded-full"
+                    />
+                  </Avatar>
+                  <div>
+                    <p className="text-white font-medium text-sm">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-white/50 text-xs">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Metrics Section */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-center"
+          >
+            <div className="text-5xl font-bold text-lime-400">50K+</div>
+            <p className="text-white/50 mt-2">Active Users</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="text-center"
+          >
+            <div className="text-5xl font-bold text-lime-400">4.9/5</div>
+            <p className="text-white/50 mt-2">Average Rating</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="text-center"
+          >
+            <div className="text-5xl font-bold text-lime-400">2M+</div>
+            <p className="text-white/50 mt-2">Projects Created</p>
+          </motion.div>
         </div>
       </div>
     </section>
