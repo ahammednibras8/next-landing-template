@@ -1,4 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
+import Faqs from "@/components/sections/Faqs";
 import Features from "@/components/sections/Features";
 import Hero from "@/components/sections/Hero";
 import Integrations from "@/components/sections/Integrations";
@@ -16,6 +17,7 @@ export default function Home() {
       <Integrations />
       <Pricing />
       <Testimonials />
+      <Faqs />
     </>
   );
 }
