@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Faqs from "@/components/sections/Faqs";
 import Features from "@/components/sections/Features";
@@ -18,6 +19,7 @@ export default function Home() {
       <Pricing />
       <Testimonials />
       <Faqs />
+      <Footer />
     </>
   );
 }
