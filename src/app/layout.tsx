@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { metadata } from "@/lib/seo-metadata";
+import { siteConfig } from "@/lib/site-config";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -9,55 +10,44 @@ const inter = Inter({
   axes: ["opsz"],
 });
 
-export const metadata: Metadata = {
-  title: "Next Landing System – SEO-Optimized Next.js Landing Page Template",
-  description:
-    "High-performance, SEO-optimized landing page framework built with Next.js and Tailwind CSS. Includes analytics, CRM, and automation integrations for maximum conversions.",
-  keywords: [
-    "Next.js landing page",
-    "SEO optimized template",
-    "Next.js SaaS starter",
-    "conversion optimized landing page",
-    "Tailwind landing page",
-    "open source landing page system",
-  ],
-  openGraph: {
-    title: "Next Landing System – SEO-Optimized Next.js Landing Page Template",
-    description:
-      "Build high-converting, SEO-friendly landing pages in minutes with integrated analytics, CRM, and automation tools.",
-    url: "https://yourdomain.com",
-    siteName: "Next Landing System",
-    images: [
-      {
-        url: "https://yourdomain.com/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Next Landing System – High-Converting Landing Page Template",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Next Landing System – SEO-Optimized Next.js Landing Page Template",
-    description:
-      "Build and deploy high-converting, SEO-friendly landing pages with Next.js and Tailwind CSS.",
-    images: ["https://yourdomain.com/og-image.jpg"],
-    creator: "@yourhandle",
-  },
-  alternates: {
-    canonical: "https://yourdomain.com",
-  },
-};
+export { metadata };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="theme-color" content="#0a0a0a" />
+        <meta name="color-scheme" content="dark light" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content={siteConfig.name} />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: siteConfig.name,
+              description: siteConfig.description,
+              url: siteConfig.url,
+              author: {
+                "@type": "Person",
+                name: siteConfig.author,
+                sameAs: [siteConfig.twitterUrl],
+              },
+              publisher: { "@type": "Person", name: siteConfig.author },
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} font-sans antialiased bg-neutral-950 text-white`}
       >
