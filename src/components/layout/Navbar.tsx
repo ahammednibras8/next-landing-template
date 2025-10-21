@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import Button from "../ui/Button";
 import posthog from "posthog-js";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "#" },
@@ -18,13 +19,21 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleLogin = () => {
     posthog.capture("login_clicked");
+    router.push("/login");
   };
 
   const handleSignup = () => {
     posthog.capture("signup_clicked");
+    router.push("/signup");
+  };
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    posthog.capture("menu_toggle", { isOpen: !isOpen });
   };
 
   return (
@@ -66,10 +75,7 @@ export default function Navbar() {
               <div className="flex justify-end gap-4">
                 <button
                   type="button"
-                  onClick={() => {
-                    setIsOpen(!isOpen);
-                    posthog.capture("menu_toggle", { isOpen: !isOpen });
-                  }}
+                  onClick={toggleMenu}
                   className="lg:hidden"
                 >
                   {isOpen ? (
@@ -121,10 +127,18 @@ export default function Navbar() {
                         {link.label}
                       </a>
                     ))}
-                    <Button className="w-3/4" variant="secondary">
+                    <Button
+                      onClick={handleLogin}
+                      className="w-3/4"
+                      variant="secondary"
+                    >
                       Login
                     </Button>
-                    <Button className="w-3/4" variant="primary">
+                    <Button
+                      onClick={handleSignup}
+                      className="w-3/4"
+                      variant="primary"
+                    >
                       Signup
                     </Button>
                   </div>
