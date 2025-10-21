@@ -5,6 +5,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import Button from "../ui/Button";
+import posthog from "posthog-js";
 
 const navLinks = [
   { label: "Home", href: "#" },
@@ -17,6 +18,14 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogin = () => {
+    posthog.capture("login_clicked");
+  };
+
+  const handleSignup = () => {
+    posthog.capture("signup_clicked");
+  };
 
   return (
     <>
@@ -41,6 +50,11 @@ export default function Navbar() {
                       className="hover:text-lime-400 transition-colors duration-300"
                       href={nav.href}
                       key={nav.href}
+                      onClick={() =>
+                        posthog.capture(`Nav: ${nav.label}`, {
+                          label: nav.label,
+                        })
+                      }
                     >
                       {nav.label}
                     </a>
@@ -52,7 +66,10 @@ export default function Navbar() {
               <div className="flex justify-end gap-4">
                 <button
                   type="button"
-                  onClick={() => setIsOpen(!isOpen)}
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                    posthog.capture("menu_toggle", { isOpen: !isOpen });
+                  }}
                   className="lg:hidden"
                 >
                   {isOpen ? (
@@ -74,16 +91,18 @@ export default function Navbar() {
                   )}
                 </button>
                 <Button
+                  onClick={handleLogin}
                   variant="secondary"
                   className="hidden lg:inline-flex items-center hover:bg-white hover:text-black transition-colors duration-300"
                 >
-                  Login
+                  Log In
                 </Button>
                 <Button
+                  onClick={handleSignup}
                   variant="primary"
                   className="hidden lg:inline-flex items-center hover:bg-black hover:text-lime-400 transition-colors duration-300"
                 >
-                  Signup
+                  Sign Up
                 </Button>
               </div>
             </figure>

@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { metadata } from "@/lib/seo-metadata";
 import { siteConfig } from "@/lib/site-config";
-import Script from "next/script";
+import { PostHogProvider } from "./providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -12,8 +12,6 @@ const inter = Inter({
 });
 
 export { metadata };
-
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({
   children,
@@ -50,33 +48,11 @@ export default function RootLayout({
             }),
           }}
         />
-
-        {/* Google Analytics */}
-        {GA_ID && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            />
-            <Script
-              id="ga-init"
-              strategy="afterInteractive"
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${GA_ID}', { page_path: window.location.pathname });
-                `,
-              }}
-            />
-          </>
-        )}
       </head>
       <body
         className={`${inter.variable} font-sans antialiased bg-neutral-950 text-white`}
       >
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   );
