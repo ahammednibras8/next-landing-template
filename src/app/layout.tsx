@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { metadata } from "@/lib/seo-metadata";
 import { siteConfig } from "@/lib/site-config";
+import { PostHogProvider } from "./providers";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -51,7 +52,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} font-sans antialiased bg-neutral-950 text-white`}
       >
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   );

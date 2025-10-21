@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Menu, X } from "lucide-react";
 import Button from "../ui/Button";
@@ -77,13 +77,13 @@ export default function Navbar() {
                   variant="secondary"
                   className="hidden lg:inline-flex items-center hover:bg-white hover:text-black transition-colors duration-300"
                 >
-                  Login
+                  Log In
                 </Button>
                 <Button
                   variant="primary"
                   className="hidden lg:inline-flex items-center hover:bg-black hover:text-lime-400 transition-colors duration-300"
                 >
-                  Signup
+                  Sign Up
                 </Button>
               </div>
             </figure>
