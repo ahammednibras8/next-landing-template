@@ -3,8 +3,9 @@
 import { motion, useAnimate } from "motion/react";
 import Image from "next/image";
 import Pointer from "../elements/Pointer";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Button from "../ui/Button";
+import posthog from "posthog-js";
 
 export default function Hero() {
   const [leftDesignScope, leftDesignAnimate] = useAnimate();
@@ -61,6 +62,23 @@ export default function Hero() {
     rightPointerAnimate,
     rightPointerScope,
   ]);
+
+  const handleEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const email = (
+      e.currentTarget.elements.namedItem("email") as HTMLInputElement
+    )?.value;
+
+    if (email) {
+      posthog.capture("email_submit", {
+        email,
+        utm_source: new URLSearchParams(window.location.search).get(
+          "utm_source"
+        ),
+      });
+    }
+  };
 
   return (
     <section
@@ -127,6 +145,7 @@ export default function Hero() {
           </p>
 
           <motion.form
+            onSubmit={handleEmail}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
