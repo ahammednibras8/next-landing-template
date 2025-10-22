@@ -174,6 +174,8 @@ export default function SignUpPage() {
               routing="path"
               path="/signup"
               signInUrl="/login"
+              forceRedirectUrl="/home"
+              fallbackRedirectUrl="/home"
             />
           </div>
 
