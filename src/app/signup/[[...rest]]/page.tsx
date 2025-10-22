@@ -3,9 +3,10 @@
 import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { SignUp } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import LogoTicker from "@/components/sections/LogoTicker";
+import { FeatureItem } from "@/components/sections/auth/FeatureItem";
 
 const FEATURES = [
   {
@@ -21,64 +22,6 @@ const FEATURES = [
     description: "Get help from our team whenever you need it.",
   },
 ];
-
-const COMPANIES = [
-  "acme-corp",
-  "apex",
-  "celestial",
-  "echo-valley",
-  "outside",
-  "pulse",
-  "quantum",
-  "twice",
-];
-
-const FeatureItem = ({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}) => (
-  <div className="flex items-start gap-4">
-    <div className="bg-lime-400/10 rounded-full p-2 mt-0.5 flex-shrink-0">
-      <Check className="w-5 h-5 text-lime-400" />
-    </div>
-    <div>
-      <h3 className="text-white font-semibold">{title}</h3>
-      <p className="text-white/50 text-sm">{description}</p>
-    </div>
-  </div>
-);
-
-const LogoTicker = () => (
-  <div className="pt-8 border-t border-white/10">
-    <p className="text-white/40 text-sm mb-6">Trusted by teams at</p>
-    <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
-      <motion.div
-        animate={{ x: "-50%" }}
-        transition={{
-          duration: 30,
-          ease: "linear",
-          repeat: Infinity,
-        }}
-        className="flex gap-12 pr-12"
-      >
-        {[...COMPANIES, ...COMPANIES].map((company, i) => (
-          <Image
-            key={`${company}-${i}`}
-            src={`/components/companies/${company}.svg`}
-            alt={company}
-            width={100}
-            height={40}
-            className="opacity-60 h-8 w-auto flex-shrink-0"
-            draggable={false}
-          />
-        ))}
-      </motion.div>
-    </div>
-  </div>
-);
 
 export default function SignUpPage() {
   return (
